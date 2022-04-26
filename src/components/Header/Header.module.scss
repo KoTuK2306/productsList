@@ -1,0 +1,78 @@
+@import "../../variables.scss";
+
+.header {
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: $blueNight;
+
+  .headerItem {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-gap: 24px;
+
+    .entriesWrapper {
+      display: grid;
+      grid-template-columns: repeat(3, max-content);
+      align-items: center;
+      grid-gap: 12px;
+
+      .select {
+        appearance: none;
+        box-sizing: border-box;
+        width: 43px;
+        height: 31px;
+        padding: 8px;
+        border-radius: 8px;
+        font-family: $primaryFont;
+        background-color: $darkBlueNight;
+        background-image: url("../../../public/images/chevron.svg");
+        background-repeat: no-repeat;
+        background-position: 25px 14px;
+        font-size: 12px;
+        color: $white;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+    }
+    .search {
+      font-size: 12px;
+      font-family: $primaryFont;
+      color: $white;
+      height: 32px;
+      width: 220px;
+      box-sizing: border-box;
+      padding: 9px 9px 9px 33px;
+      outline: none;
+      background: none;
+      border-radius: 8px;
+      border: 1px solid $white;
+      background-image: url("../../../public/images/search.svg");
+      background-repeat: no-repeat;
+      background-position: 10px center;
+    }
+    .search::placeholder {
+      color: $white;
+    }
+  }
+  .addCustomer {
+    color: $white;
+    font-family: $MontSerrat700;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    height: 32px;
+    width: 140px;
+    background-color: $purple;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+}
