@@ -1,0 +1,36 @@
+@import "../../variables.scss";
+
+.spinnerWrapper {
+  margin: 20% auto;
+  width: 60px;
+  height: 60px;
+
+  .spinner {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border: 5px solid $darkBlueNight;
+    border-top-color: $green;
+    border-bottom-color: $red;
+    border-radius: 50%;
+    animation: rotate 5s linear infinite;
+
+    .spinnerInner {
+      border-top-color: $orange;
+      border-bottom-color: $white;
+      animation-duration: 2.5s;
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: scale(1) rotate(360deg);
+  }
+  50% {
+    transform: scale(0.8) rotate(-360deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}

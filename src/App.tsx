@@ -1,29 +1,31 @@
 import { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Header } from "./components/Header";
-import { useTypedSelector } from "./hooks/useTypedSelector";
+import { useTypedDispatch, useTypedSelector } from "./hooks/useTypedSelector";
 import { fetchProducts } from "./store/actionCreators/product";
 import { Product } from "./interfaces/Product";
+import { Spinner } from "./components/Spinner";
 import classes from "./App.module.scss";
 
 export const App: FC = () => {
   const { error, loading, products } = useTypedSelector((state) => state.products);
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
 
-  if (loading) {
-    return <h1>Загрузка</h1>;
-  }
-
-  if (error) {
-    return <h1>{error}</h1>;
-  }
+  const showLoadOrError = () => {
+    if (loading) {
+      return <Spinner />;
+    }
+    if (error) {
+      <h1>{error}</h1>;
+    }
+  };
 
   return (
     <div className={classes.app}>
       <Header />
+      {showLoadOrError()}
       {products.map((product: Product) => (
         <div key={product.tracking_id} className={classes.object}>
           <p>{product.tracking_id}</p>
