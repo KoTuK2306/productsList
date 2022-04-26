@@ -7,7 +7,7 @@
   justify-content: space-between;
   background-color: $blueNight;
 
-  .entriesWithSearch {
+  .headerItem {
     display: grid;
     grid-template-columns: repeat(2, max-content);
     grid-gap: 24px;

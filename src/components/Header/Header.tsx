@@ -6,7 +6,7 @@ export const Header: FC = () => {
   return (
     <header>
       <Container className={classes.header}>
-        <div className={classes.entriesWithSearch}>
+        <div className={classes.headerItem}>
           <div className={classes.entriesWrapper}>
             <p>Show</p>
             <select className={classes.select} defaultValue={10} name="select">
