@@ -1,0 +1,16 @@
+@font-face {
+  font-family: MontSerrat500;
+  src: url(fonts/Montserrat500.ttf);
+}
+
+@font-face {
+  font-family: MontSerrat700;
+  src: url(fonts/Montserrat700.ttf);
+}
+
+$primaryFont: MontSerrat500, sans-serif;
+$MontSerrat700: MontSerrat700, sans-serif;
+$white: #ffffff;
+$blueNight: #1d1e42;
+$darkBlueNight: #141432;
+$purple: #624de3;
