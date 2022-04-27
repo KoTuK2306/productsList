@@ -1,3 +1,5 @@
+import { Product } from "./../interfaces/Product";
+
 export enum ProductActionTypes {
   FETCH_PRODUCTS = "FETCH_PRODUCTS",
   FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS",
@@ -5,15 +7,15 @@ export enum ProductActionTypes {
 }
 
 export interface ProductState {
-  products: any[];
-  loading: boolean;
+  products: Product[];
+  isLoaded: boolean;
   error: null | string;
 }
 
 interface FetchProductAction {
   type: ProductActionTypes.FETCH_PRODUCTS;
 }
-interface FetchProducSuccesstAction {
+interface FetchProductSuccessAction {
   type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS;
   payload: any[];
 }
@@ -22,4 +24,4 @@ interface FetchProductErrorAction {
   payload: string;
 }
 
-export type ProductAction = FetchProductAction | FetchProducSuccesstAction | FetchProductErrorAction;
+export type ProductAction = FetchProductAction | FetchProductSuccessAction | FetchProductErrorAction;
