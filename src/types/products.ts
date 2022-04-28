@@ -8,7 +8,7 @@ export enum ProductActionTypes {
 
 export interface ProductState {
   products: Product[];
-  isLoaded: boolean;
+  isLoading: boolean;
   error: null | string;
 }
 
