@@ -1,6 +1,8 @@
+@import "./variables.scss";
+
 .app {
-  margin: 0;
-  padding: 0;
+  min-height: 100vh;
+  background-color: $blueNight;
 
   .object {
     margin-top: 10px;
