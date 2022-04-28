@@ -1,24 +1,24 @@
 import { FC } from "react";
 import classNames from "classnames";
 import { GridContainer } from "../../../layouts/GridContainer";
-import { Product as ProductType } from "./../../../interfaces/Product";
-import { makePathToPublic } from "./../../../utils/makePathToPublic";
+import { Product as ProductType } from "../../../interfaces/Product";
+import { makePathToPublic } from "../../../utils/makePathToPublic";
 import classes from "./Product.module.scss";
 
 enum Statuses {
-  delivered = "Delivered",
-  canceled = "Canceled",
-  process = "Procces",
+  DELIVERED = "Delivered",
+  CANCELED = "Canceled",
+  PROCESS = "Procces",
 }
 
 const getColor = (status: string) => {
-  if (status === Statuses.delivered) {
+  if (status === Statuses.DELIVERED) {
     return classes.green;
   }
-  if (status === Statuses.canceled) {
+  if (status === Statuses.CANCELED) {
     return classes.red;
   }
-  if (status === Statuses.process) {
+  if (status === Statuses.PROCESS) {
     return classes.orange;
   }
 };
