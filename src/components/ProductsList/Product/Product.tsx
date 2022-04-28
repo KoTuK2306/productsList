@@ -5,15 +5,21 @@ import { Product as ProductType } from "./../../../interfaces/Product";
 import { makePathToPublic } from "./../../../utils/makePathToPublic";
 import classes from "./Product.module.scss";
 
+enum Statuses {
+  delivered = "Delivered",
+  canceled = "Canceled",
+  process = "Procces",
+}
+
 const getColor = (status: string) => {
-  if (status === "Delivered") {
-    return classNames(classes.status, classes.green);
+  if (status === Statuses.delivered) {
+    return classes.green;
   }
-  if (status === "Canceled") {
-    return classNames(classes.status, classes.red);
+  if (status === Statuses.canceled) {
+    return classes.red;
   }
-  if (status === "Procces") {
-    return classNames(classes.status, classes.orange);
+  if (status === Statuses.process) {
+    return classes.orange;
   }
 };
 
@@ -39,7 +45,7 @@ export const Product: FC<ProductType> = ({
         <p>{date.replace(/-/g, "/")}</p>
         <p>{`$${amount}`}</p>
         <p>{payment_mode}</p>
-        <div className={getColor(status)}>
+        <div className={classNames(classes.status, getColor(status))}>
           <p>{status}</p>
         </div>
         <div className={classes.actionsWrapper}>
