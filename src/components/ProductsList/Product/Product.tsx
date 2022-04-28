@@ -3,15 +3,9 @@ import classNames from "classnames";
 import { GridContainer } from "../../../layouts/GridContainer";
 import { Product as ProductType } from "../../../interfaces/Product";
 import { makePathToPublic } from "../../../utils/makePathToPublic";
+import { Statuses } from "../../../enums/Statuses";
+import { ValueOf } from "../../../interfaces/ValueOf";
 import classes from "./Product.module.scss";
-
-enum Statuses {
-  DELIVERED = "Delivered",
-  CANCELED = "Canceled",
-  PROCESS = "Procces",
-}
-
-type ValueOf<T> = T[keyof T];
 
 const getColor = (status: ValueOf<Statuses>) => {
   if (status === Statuses.DELIVERED) {

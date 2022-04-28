@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
-import { ProductAction, ProductActionTypes } from "../../types/products";
-import { Product } from "./../../interfaces/Product";
+import { ProductAction } from "../../interfaces/products";
+import { ProductActionTypes } from "../../enums/ProductActionTypes";
+import { Product } from "../../interfaces/Product";
 
 export const doFetchProduct = (): ProductAction => ({ type: ProductActionTypes.FETCH_PRODUCTS });
 export const fetchProductSuccess = (data: Product[]): ProductAction => ({
