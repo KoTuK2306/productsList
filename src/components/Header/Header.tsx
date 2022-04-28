@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Container } from "../../layouts/Container";
+import { makePathToPublic } from "../../utils/makePathToPublic";
 import classes from "./Header.module.scss";
 
 export const Header: FC = () => {
@@ -19,7 +20,7 @@ export const Header: FC = () => {
           <input type="search" className={classes.search} placeholder="Search..."></input>
         </div>
         <button className={classes.addCustomer}>
-          <img src={`${process.env.PUBLIC_URL}/images/plus.svg`} alt="plusIcon" />
+          <img src={makePathToPublic("/images/plus.svg")} alt="plusIcon" />
           Add Customer
         </button>
       </Container>

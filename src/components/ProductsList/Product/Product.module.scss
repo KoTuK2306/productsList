@@ -1,0 +1,64 @@
+@import "../../../variables.scss";
+
+.product {
+  .title {
+    text-align: center;
+  }
+
+  .productImageWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .productImage {
+      margin-right: 8px;
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+.actionsWrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-gap: 20px;
+  justify-content: center;
+
+  .actionButton {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+  }
+}
+
+.product:nth-child(2n) {
+  background-color: $lightBlueNight;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px;
+  padding: 8px 12px;
+  width: 85px;
+  height: 14px;
+}
+
+.red {
+  color: $red;
+  background-color: $lightRed;
+}
+
+.green {
+  color: $green;
+  background-color: $lightGreen;
+}
+
+.orange {
+  color: $orange;
+  background-color: $lightOrange;
+}

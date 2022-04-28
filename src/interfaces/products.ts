@@ -1,10 +1,5 @@
-import { Product } from "./../interfaces/Product";
-
-export enum ProductActionTypes {
-  FETCH_PRODUCTS = "FETCH_PRODUCTS",
-  FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS",
-  FETCH_PRODUCTS_ERROR = "FETCH_PRODUCTS_ERROR",
-}
+import { ProductActionTypes } from "../enums/ProductActionTypes";
+import { Product } from "./Product";
 
 export interface ProductState {
   products: Product[];

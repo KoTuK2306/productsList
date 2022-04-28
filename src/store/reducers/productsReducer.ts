@@ -1,4 +1,5 @@
-import { ProductAction, ProductActionTypes, ProductState } from "../../types/products";
+import { ProductActionTypes } from "../../enums/ProductActionTypes";
+import { ProductAction, ProductState } from "../../interfaces/products";
 
 const initialState: ProductState = {
   products: [],

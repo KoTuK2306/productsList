@@ -1,0 +1,9 @@
+.gridContainer {
+  box-sizing: border-box;
+  padding: 16px;
+  min-height: 64px;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 16px;
+}
