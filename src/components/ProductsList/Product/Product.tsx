@@ -11,7 +11,9 @@ enum Statuses {
   PROCESS = "Procces",
 }
 
-const getColor = (status: string) => {
+type ValueOf<T> = T[keyof T];
+
+const getColor = (status: ValueOf<Statuses>) => {
   if (status === Statuses.DELIVERED) {
     return classes.green;
   }
