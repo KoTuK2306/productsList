@@ -6,6 +6,7 @@ import { makePathToPublic } from "../../../utils/makePathToPublic";
 import { Statuses } from "../../../enums/Statuses";
 import { ValueOf } from "../../../interfaces/ValueOf";
 import classes from "./Product.module.scss";
+import { Image } from "../../Image";
 
 const getColor = (status: ValueOf<Statuses>) => {
   if (status === Statuses.DELIVERED) {
@@ -34,7 +35,7 @@ export const Product: FC<ProductType> = ({
       <GridContainer>
         <p className={classes.title}>{`#${tracking_id}`}</p>
         <div data-title={name} className={classes.productImageWrapper}>
-          <img className={classes.productImage} src={image} alt={name} />
+          <Image src={image} alt={name} className={classes.productImage} />
           <p className={classes.productName}>{name}</p>
         </div>
         <p>{customer}</p>

@@ -3,14 +3,14 @@ import classNames from "classnames";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { GridContainer } from "../../layouts/GridContainer";
 import { makePathToPublic } from "../../utils/makePathToPublic";
-import { useTypedDispatch } from "../../hooks/useTypedDispathc";
+import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 import { fetchProducts } from "../../store/actions/product";
 import { Product as ProductComponent } from "./Product";
 import { Spinner } from "../Spinner";
 import classes from "./ProductsList.module.scss";
 
 export const ProductsList: FC = () => {
-  const { error, isLoading, products } = useTypedSelector((state) => state.products);
+  const { error, isLoading, filteredProducts } = useTypedSelector((state) => state.products);
   const dispatch = useTypedDispatch();
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const ProductsList: FC = () => {
       </GridContainer>
       {isLoading && <Spinner />}
       {error && <h1>{error}</h1>}
-      {products.map((product) => (
+      {filteredProducts.map((product) => (
         <ProductComponent
           key={product.tracking_id}
           tracking_id={product.tracking_id}
