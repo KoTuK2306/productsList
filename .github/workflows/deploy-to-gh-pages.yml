@@ -21,7 +21,9 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'        
+        cache: 'npm' 
+    - run: git config --global user.email "dmitriy_aleshin_00@mail.ru"
+    - run: git config --global user.name "KoTuK2306"
     - run: npm ci
     - run: npm run deploy
     
