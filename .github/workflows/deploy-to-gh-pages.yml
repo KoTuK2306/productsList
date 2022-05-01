@@ -14,6 +14,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/.github/cache
+        key: ${{ runner.os }}-github-cache-${{ hashFiles('**/*.npm') }}
     # Runs deploy
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
