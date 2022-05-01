@@ -9,21 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    # Cache npm dependencies
-    - name: Setup NPM
-      uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-    - run: git config --global user.email "dmitriy_aleshin_00@mail.ru"
-    - run: git config --global user.name "KoTuK2306"
-    - run: npm ci
-    # Runs deploy
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm' 
+    - uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+    - run: git config --global user.email "dmitriy_aleshin_00@mail.ru"
+    - run: git config --global user.name "KoTuK2306"
+    - run: npm ci
     - run: npm run deploy
     
