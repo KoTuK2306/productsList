@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Container } from "../../layouts/Container";
 import { searchProducts } from "../../store/actions/product";
 import { makePathToPublic } from "../../utils/makePathToPublic";
-import { useTypedDispatch } from "./../../hooks/useTypedDispathc";
+import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 import classes from "./Header.module.scss";
 
 export const Header: FC = () => {

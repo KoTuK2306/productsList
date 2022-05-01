@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { GridContainer } from "../../layouts/GridContainer";
 import { makePathToPublic } from "../../utils/makePathToPublic";
-import { useTypedDispatch } from "../../hooks/useTypedDispathc";
+import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 import { fetchProducts } from "../../store/actions/product";
 import { Product as ProductComponent } from "./Product";
 import { Spinner } from "../Spinner";
@@ -16,7 +16,6 @@ export const ProductsList: FC = () => {
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
-  useEffect(() => {});
 
   return (
     <section>
