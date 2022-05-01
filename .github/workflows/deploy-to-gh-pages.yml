@@ -9,6 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    # Cache npm dependencies
+    - name: Setup NPM
+      uses: actions/cache@v2
+      with:
+        path: ~/.github/cache
+    # Runs deploy
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
