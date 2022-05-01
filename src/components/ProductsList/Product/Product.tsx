@@ -8,7 +8,6 @@ import { Statuses } from "../../../enums/Statuses";
 import { ValueOf } from "../../../interfaces/ValueOf";
 import { Image } from "../../Image";
 import classes from "./Product.module.scss";
-import { Image } from "../../Image";
 
 const getColor = (status: ValueOf<Statuses>) => {
   if (status === Statuses.DELIVERED) {
