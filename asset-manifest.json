@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/productsList/static/css/main.f6ab5549.css",
-    "main.js": "/productsList/static/js/main.b5c12608.js",
+    "main.css": "/productsList/static/css/main.b73735e2.css",
+    "main.js": "/productsList/static/js/main.2aa4db98.js",
     "static/js/787.28cb0dcd.chunk.js": "/productsList/static/js/787.28cb0dcd.chunk.js",
     "static/media/Montserrat700.ttf": "/productsList/static/media/Montserrat700.0915f0a8c3367a6d05ec.ttf",
     "static/media/Montserrat500.ttf": "/productsList/static/media/Montserrat500.647f0e61af3a76a138c3.ttf",
     "index.html": "/productsList/index.html",
     "static/media/search.svg": "/productsList/static/media/search.dddcd5a0ecc809e9df2a.svg",
     "static/media/chevron.svg": "/productsList/static/media/chevron.211226e45f3b43ed7eb7.svg",
-    "main.f6ab5549.css.map": "/productsList/static/css/main.f6ab5549.css.map",
-    "main.b5c12608.js.map": "/productsList/static/js/main.b5c12608.js.map",
+    "main.b73735e2.css.map": "/productsList/static/css/main.b73735e2.css.map",
+    "main.2aa4db98.js.map": "/productsList/static/js/main.2aa4db98.js.map",
     "787.28cb0dcd.chunk.js.map": "/productsList/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f6ab5549.css",
-    "static/js/main.b5c12608.js"
+    "static/css/main.b73735e2.css",
+    "static/js/main.2aa4db98.js"
   ]
 }
