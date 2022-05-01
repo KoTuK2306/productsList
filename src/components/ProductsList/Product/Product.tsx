@@ -33,9 +33,9 @@ export const Product: FC<ProductType> = ({
     <div className={classes.product}>
       <GridContainer>
         <p className={classes.title}>{`#${tracking_id}`}</p>
-        <div className={classes.productImageWrapper}>
+        <div data-title={name} className={classes.productImageWrapper}>
           <img className={classes.productImage} src={image} alt={name} />
-          <p>{name}</p>
+          <p className={classes.productName}>{name}</p>
         </div>
         <p>{customer}</p>
         <p>{date.replace(/-/g, "/")}</p>
