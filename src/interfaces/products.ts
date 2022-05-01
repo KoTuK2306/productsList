@@ -5,18 +5,27 @@ export interface ProductState {
   products: Product[];
   isLoading: boolean;
   error: null | string;
+  filteredProducts: Product[];
 }
 
-interface FetchProductAction {
+export interface FetchProductAction {
   type: ProductActionTypes.FETCH_PRODUCTS;
 }
-interface FetchProductSuccessAction {
+export interface FetchProductSuccessAction {
   type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS;
-  payload: any[];
+  payload: Product[];
 }
-interface FetchProductErrorAction {
+export interface FetchProductErrorAction {
   type: ProductActionTypes.FETCH_PRODUCTS_ERROR;
   payload: string;
 }
+export interface FilterProductAction {
+  type: ProductActionTypes.FILTER_PRODUCTS;
+  payload: string;
+}
 
-export type ProductAction = FetchProductAction | FetchProductSuccessAction | FetchProductErrorAction;
+export type ProductAction =
+  | FetchProductAction
+  | FetchProductSuccessAction
+  | FetchProductErrorAction
+  | FilterProductAction;
