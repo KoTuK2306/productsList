@@ -1,12 +1,13 @@
-import { FC } from "react";
 import classNames from "classnames";
+import dayjs from "dayjs";
+import { FC } from "react";
 import { GridContainer } from "../../../layouts/GridContainer";
 import { Product as ProductType } from "../../../interfaces/Product";
 import { makePathToPublic } from "../../../utils/makePathToPublic";
 import { Statuses } from "../../../enums/Statuses";
 import { ValueOf } from "../../../interfaces/ValueOf";
-import classes from "./Product.module.scss";
 import { Image } from "../../Image";
+import classes from "./Product.module.scss";
 
 const getColor = (status: ValueOf<Statuses>) => {
   if (status === Statuses.DELIVERED) {
@@ -39,7 +40,7 @@ export const Product: FC<ProductType> = ({
           <p className={classes.productName}>{name}</p>
         </div>
         <p>{customer}</p>
-        <p>{date.replace(/-/g, "/")}</p>
+        <p>{dayjs(date).format("DD/MM/YYYY")}</p>
         <p>{`$${amount}`}</p>
         <p>{payment_mode}</p>
         <div className={classNames(classes.status, getColor(status))}>
