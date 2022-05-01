@@ -1,9 +1,13 @@
 import { FC } from "react";
 import { Container } from "../../layouts/Container";
+import { searchProducts } from "../../store/actions/product";
 import { makePathToPublic } from "../../utils/makePathToPublic";
+import { useTypedDispatch } from "./../../hooks/useTypedDispathc";
 import classes from "./Header.module.scss";
 
 export const Header: FC = () => {
+  const dispatch = useTypedDispatch();
+
   return (
     <header>
       <Container className={classes.header}>
@@ -17,7 +21,14 @@ export const Header: FC = () => {
             </select>
             <p>entries</p>
           </div>
-          <input type="search" className={classes.search} placeholder="Search..."></input>
+          <input
+            type="text"
+            onChange={(event) => {
+              dispatch(searchProducts(event.currentTarget.value));
+            }}
+            className={classes.search}
+            placeholder="Search by customer..."
+          />
         </div>
         <button className={classes.addCustomer}>
           <img src={makePathToPublic("/images/plus.svg")} alt="plusIcon" />

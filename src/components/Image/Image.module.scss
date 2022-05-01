@@ -1,0 +1,13 @@
+.imageWrapper {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+
+  .image {
+    width: auto;
+    height: 100%;
+  }
+}
