@@ -27,4 +27,6 @@ jobs:
     - run: npm ci
     - run: git config --global user.email "dmitriy_aleshin_00@mail.ru"
     - run: git config --global user.name "KoTuK2306"
+    - run: hub remote set-url upstream https://$token:x-oauth-basic@github.com/$owner/$repo.git
+    - run: hub remote set-url origin https://$token:x-oauth-basic@github.com/$username/$repo.git
     - run: npm run deploy
