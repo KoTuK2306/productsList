@@ -19,7 +19,9 @@ export const productsReducer = (state = initialState, action: ProductAction): Pr
     case ProductActionTypes.FILTER_PRODUCTS:
       return {
         ...state,
-        filteredProducts: state.products.filter((product) => product.customer.includes(action.payload)),
+        filteredProducts: state.products.filter((product) =>
+          product.customer.toLowerCase().includes(action.payload.toLowerCase())
+        ),
       };
     default:
       return state;

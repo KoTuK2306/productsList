@@ -43,9 +43,12 @@ export const Product: FC<ProductType> = ({
         <p>{dayjs(date).format("DD/MM/YYYY")}</p>
         <p>{`$${amount}`}</p>
         <p>{payment_mode}</p>
-        <div className={classNames(classes.status, getColor(status))}>
-          <p>{status}</p>
+        <div className={classes.statusWrapper}>
+          <div className={classNames(classes.status, getColor(status))}>
+            <p>{status}</p>
+          </div>
         </div>
+
         <div className={classes.actionsWrapper}>
           <button className={classes.actionButton}>
             <img src={makePathToPublic("/images/edit.svg")} alt="edit" />

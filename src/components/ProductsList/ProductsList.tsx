@@ -18,7 +18,7 @@ export const ProductsList: FC = () => {
   }, []);
 
   return (
-    <section>
+    <section className={classes.productsList}>
       <GridContainer>
         <div className={classes.columnName}>
           <p className={classes.title}>Tracking ID</p>
