@@ -2,7 +2,7 @@
 
 .pagination {
   position: fixed;
-  top: calc(100vh - 64px);
+  bottom: 0;
   background-color: $blueNight;
   gap: 12px;
   justify-content: center;
