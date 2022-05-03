@@ -11,6 +11,25 @@
   justify-content: space-between;
 }
 
+.trianglesWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 11px;
+
+  .triangle {
+    height: 14px;
+    width: 10px;
+    color: $grey;
+  }
+
+  .rotated {
+    transform: rotate(180deg);
+  }
+}
+
 .sortButton {
   display: flex;
   align-items: center;

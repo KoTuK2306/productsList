@@ -2,12 +2,12 @@ import { FC, useEffect } from "react";
 import classNames from "classnames";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { GridContainer } from "../../layouts/GridContainer";
-import { makePathToPublic } from "../../utils/makePathToPublic";
 import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 import { fetchProducts } from "../../store/actions/product";
 import { Product as ProductComponent } from "./Product";
 import { Spinner } from "../Spinner";
 import { Pagination } from "../Pagination";
+import { triangle } from "../../tsxIcons/triangle";
 import classes from "./ProductsList.module.scss";
 
 export const ProductsList: FC = () => {
@@ -30,15 +30,24 @@ export const ProductsList: FC = () => {
         </div>
         <button className={classNames(classes.columnName, classes.sortButton)}>
           <p>Product</p>
-          <img src={makePathToPublic("/images/doubleChevron.svg")} alt="doubleChevron" />
+          <div className={classes.trianglesWrapper}>
+            <div className={classes.triangle}>{triangle}</div>
+            <div className={classNames(classes.triangle, classes.rotated)}>{triangle}</div>
+          </div>
         </button>
         <button className={classNames(classes.columnName, classes.sortButton)}>
           <p>Customer</p>
-          <img src={makePathToPublic("/images/doubleChevron.svg")} alt="doubleChevron" />
+          <div className={classes.trianglesWrapper}>
+            <div className={classes.triangle}>{triangle}</div>
+            <div className={classNames(classes.triangle, classes.rotated)}>{triangle}</div>
+          </div>
         </button>
         <button className={classNames(classes.columnName, classes.sortButton)}>
           <p>Date</p>
-          <img src={makePathToPublic("/images/doubleChevron.svg")} alt="doubleChevron" />
+          <div className={classes.trianglesWrapper}>
+            <div className={classes.triangle}>{triangle}</div>
+            <div className={classNames(classes.triangle, classes.rotated)}>{triangle}</div>
+          </div>
         </button>
         <div className={classes.columnName}>
           <p>Amount</p>
@@ -48,7 +57,10 @@ export const ProductsList: FC = () => {
         </div>
         <button className={classNames(classes.columnName, classes.sortButton)}>
           <p>Status</p>
-          <img src={makePathToPublic("/images/doubleChevron.svg")} alt="doubleChevron" />
+          <div className={classes.trianglesWrapper}>
+            <div className={classes.triangle}>{triangle}</div>
+            <div className={classNames(classes.triangle, classes.rotated)}>{triangle}</div>
+          </div>
         </button>
         <div className={classes.columnName}>
           <p className={classes.title}>Action</p>
