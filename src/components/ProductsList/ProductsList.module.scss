@@ -1,5 +1,10 @@
 @import "../../variables.scss";
 
+.productsList {
+  height: 100%;
+  padding: 64px 0;
+}
+
 .columnName {
   display: flex;
   flex-direction: row;

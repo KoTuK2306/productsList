@@ -78,15 +78,20 @@
     cursor: pointer;
   }
 }
-
-.status {
+.statusWrapper {
+  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  border-radius: 22px;
-  padding: 8px 12px;
-  width: 85px;
-  height: 14px;
+
+  .status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    padding: 8px 12px;
+    width: 85px;
+    height: 14px;
+  }
 }
 
 .red {

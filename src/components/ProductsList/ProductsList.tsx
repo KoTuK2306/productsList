@@ -7,18 +7,23 @@ import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 import { fetchProducts } from "../../store/actions/product";
 import { Product as ProductComponent } from "./Product";
 import { Spinner } from "../Spinner";
+import { Pagination } from "../Pagination";
 import classes from "./ProductsList.module.scss";
 
 export const ProductsList: FC = () => {
   const { error, isLoading, filteredProducts } = useTypedSelector((state) => state.products);
+  const { currentPage, productsPerPage } = useTypedSelector((state) => state.pagination);
   const dispatch = useTypedDispatch();
+
+  const lastProductIndex = currentPage * productsPerPage;
+  const firstUserIndex = lastProductIndex - productsPerPage;
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
 
   return (
-    <section>
+    <section className={classes.productsList}>
       <GridContainer>
         <div className={classes.columnName}>
           <p className={classes.title}>Tracking ID</p>
@@ -51,7 +56,7 @@ export const ProductsList: FC = () => {
       </GridContainer>
       {isLoading && <Spinner />}
       {error && <h1>{error}</h1>}
-      {filteredProducts.map((product) => (
+      {filteredProducts.slice(firstUserIndex, lastProductIndex).map((product) => (
         <ProductComponent
           key={product.tracking_id}
           tracking_id={product.tracking_id}
@@ -64,6 +69,7 @@ export const ProductsList: FC = () => {
           status={product.status}
         />
       ))}
+      <Pagination />
     </section>
   );
 };

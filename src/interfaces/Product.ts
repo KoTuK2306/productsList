@@ -7,7 +7,7 @@ export interface Product {
   status: ValueOf<Statuses>;
   date: string;
   customer: string;
-  payment_mode: "Tranfer Bank" | "Cash on Delivery";
+  payment_mode: "Transfer Bank" | "Cash on Delivery";
   name: string;
   image: string;
 }
