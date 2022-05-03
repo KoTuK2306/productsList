@@ -28,7 +28,7 @@ export const Header: FC = () => {
             <p>entries</p>
           </div>
           <input
-            type="text"
+            type="search"
             onChange={(event) => {
               dispatch(searchProducts(event.currentTarget.value));
             }}
