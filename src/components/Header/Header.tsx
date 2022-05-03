@@ -3,6 +3,7 @@ import { Container } from "../../layouts/Container";
 import { searchProducts } from "../../store/actions/product";
 import { makePathToPublic } from "../../utils/makePathToPublic";
 import { useTypedDispatch } from "../../hooks/useTypedDispatch";
+import { setProductsPerPage } from "../../store/actions/pagination";
 import classes from "./Header.module.scss";
 
 export const Header: FC = () => {
@@ -14,7 +15,12 @@ export const Header: FC = () => {
         <div className={classes.headerItem}>
           <div className={classes.entriesWrapper}>
             <p>Show</p>
-            <select className={classes.select} defaultValue={10} name="select">
+            <select
+              className={classes.select}
+              defaultValue={10}
+              name="select"
+              onChange={({ target }) => dispatch(setProductsPerPage(Number(target.value)))}
+            >
               <option value={10}>10</option>
               <option value={15}>15</option>
               <option value={20}>20</option>

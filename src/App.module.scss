@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 .app {
-  min-height: 100vh;
+  min-height: calc(100vh - 64px * 2);
   background-color: $blueNight;
 
   .object {

@@ -1,12 +1,9 @@
 @import "../../variables.scss";
 
 .header {
-  height: 64px;
   position: fixed;
   z-index: 30;
   top: 0;
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
   background-color: $blueNight;
 
