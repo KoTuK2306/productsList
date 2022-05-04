@@ -7,7 +7,7 @@ import { fetchProducts } from "../../store/actions/product";
 import { Product as ProductComponent } from "./Product";
 import { Spinner } from "../Spinner";
 import { Pagination } from "../Pagination";
-import { triangle } from "../../tsxIcons/triangle";
+import { Triangle } from "../../tsxIcons/triangle";
 import classes from "./ProductsList.module.scss";
 
 export const ProductsList: FC = () => {
@@ -31,22 +31,34 @@ export const ProductsList: FC = () => {
         <button className={classNames(classes.columnName, classes.sortButton)}>
           <p>Product</p>
           <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>{triangle}</div>
-            <div className={classNames(classes.triangle, classes.rotated)}>{triangle}</div>
+            <div className={classes.triangle}>
+              <Triangle />
+            </div>
+            <div className={classNames(classes.triangle, classes.rotated)}>
+              <Triangle />
+            </div>
           </div>
         </button>
         <button className={classNames(classes.columnName, classes.sortButton)}>
           <p>Customer</p>
           <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>{triangle}</div>
-            <div className={classNames(classes.triangle, classes.rotated)}>{triangle}</div>
+            <div className={classes.triangle}>
+              <Triangle />
+            </div>
+            <div className={classNames(classes.triangle, classes.rotated)}>
+              <Triangle />
+            </div>
           </div>
         </button>
         <button className={classNames(classes.columnName, classes.sortButton)}>
           <p>Date</p>
           <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>{triangle}</div>
-            <div className={classNames(classes.triangle, classes.rotated)}>{triangle}</div>
+            <div className={classes.triangle}>
+              <Triangle />
+            </div>
+            <div className={classNames(classes.triangle, classes.rotated)}>
+              <Triangle />
+            </div>
           </div>
         </button>
         <div className={classes.columnName}>
@@ -58,8 +70,12 @@ export const ProductsList: FC = () => {
         <button className={classNames(classes.columnName, classes.sortButton)}>
           <p>Status</p>
           <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>{triangle}</div>
-            <div className={classNames(classes.triangle, classes.rotated)}>{triangle}</div>
+            <div className={classes.triangle}>
+              <Triangle />
+            </div>
+            <div className={classNames(classes.triangle, classes.rotated)}>
+              <Triangle />
+            </div>
           </div>
         </button>
         <div className={classes.columnName}>
