@@ -37,6 +37,7 @@
         cursor: pointer;
       }
     }
+
     .search {
       font-size: 12px;
       font-family: $primaryFont;
@@ -53,6 +54,22 @@
       background-repeat: no-repeat;
       background-position: 10px center;
     }
+
+    .search::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      width: 1em;
+      height: 1em;
+      background-image: url("../../../public/images/plus.svg");
+      transform: rotate(45deg);
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.2s;
+    }
+
+    .search:focus::-webkit-search-cancel-button {
+      opacity: 1;
+    }
+
     .search::placeholder {
       color: $white;
     }
