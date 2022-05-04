@@ -8,10 +8,13 @@ import { Product as ProductComponent } from "./Product";
 import { Spinner } from "../Spinner";
 import { Pagination } from "../Pagination";
 import { Triangle } from "../../tsxIcons/triangle";
+import { sort } from "./../../store/actions/product";
+import { SortTypes } from "../../enums/SortTypes";
+import { SortFields } from "../../enums/SortFields";
 import classes from "./ProductsList.module.scss";
 
 export const ProductsList: FC = () => {
-  const { error, isLoading, filteredProducts } = useTypedSelector((state) => state.products);
+  const { error, isLoading, filteredProducts, sortField, sortType } = useTypedSelector((state) => state.products);
   const { currentPage, productsPerPage } = useTypedSelector((state) => state.pagination);
   const dispatch = useTypedDispatch();
 
@@ -28,35 +31,77 @@ export const ProductsList: FC = () => {
         <div className={classes.columnName}>
           <p className={classes.title}>Tracking ID</p>
         </div>
-        <button className={classNames(classes.columnName, classes.sortButton)}>
+        <button
+          onClick={() => dispatch(sort(SortFields.PRODUCT))}
+          className={classNames(classes.columnName, classes.sortButton)}
+        >
           <p>Product</p>
           <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>
+            <div
+              className={classNames(
+                classes.triangle,
+                sortField === SortFields.PRODUCT && sortType === SortTypes.DESC ? classes.activeSort : ""
+              )}
+            >
               <Triangle />
             </div>
-            <div className={classNames(classes.triangle, classes.rotated)}>
+            <div
+              className={classNames(
+                classes.triangle,
+                classes.rotated,
+                sortField === SortFields.PRODUCT && sortType === SortTypes.ASC ? classes.activeSort : ""
+              )}
+            >
               <Triangle />
             </div>
           </div>
         </button>
-        <button className={classNames(classes.columnName, classes.sortButton)}>
+        <button
+          onClick={() => dispatch(sort(SortFields.CUSTOMER))}
+          className={classNames(classes.columnName, classes.sortButton)}
+        >
           <p>Customer</p>
           <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>
+            <div
+              className={classNames(
+                classes.triangle,
+                sortField === SortFields.CUSTOMER && sortType === SortTypes.DESC ? classes.activeSort : ""
+              )}
+            >
               <Triangle />
             </div>
-            <div className={classNames(classes.triangle, classes.rotated)}>
+            <div
+              className={classNames(
+                classes.triangle,
+                classes.rotated,
+                sortField === SortFields.CUSTOMER && sortType === SortTypes.ASC ? classes.activeSort : ""
+              )}
+            >
               <Triangle />
             </div>
           </div>
         </button>
-        <button className={classNames(classes.columnName, classes.sortButton)}>
+        <button
+          onClick={() => dispatch(sort(SortFields.DATE))}
+          className={classNames(classes.columnName, classes.sortButton)}
+        >
           <p>Date</p>
           <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>
+            <div
+              className={classNames(
+                classes.triangle,
+                sortField === SortFields.DATE && sortType === SortTypes.DESC ? classes.activeSort : ""
+              )}
+            >
               <Triangle />
             </div>
-            <div className={classNames(classes.triangle, classes.rotated)}>
+            <div
+              className={classNames(
+                classes.triangle,
+                classes.rotated,
+                sortField === SortFields.DATE && sortType === SortTypes.ASC ? classes.activeSort : ""
+              )}
+            >
               <Triangle />
             </div>
           </div>
@@ -67,13 +112,27 @@ export const ProductsList: FC = () => {
         <div className={classes.columnName}>
           <p>Payment Mode</p>
         </div>
-        <button className={classNames(classes.columnName, classes.sortButton)}>
+        <button
+          onClick={() => dispatch(sort(SortFields.STATUS))}
+          className={classNames(classes.columnName, classes.sortButton)}
+        >
           <p>Status</p>
           <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>
+            <div
+              className={classNames(
+                classes.triangle,
+                sortField === SortFields.STATUS && sortType === SortTypes.DESC ? classes.activeSort : ""
+              )}
+            >
               <Triangle />
             </div>
-            <div className={classNames(classes.triangle, classes.rotated)}>
+            <div
+              className={classNames(
+                classes.triangle,
+                classes.rotated,
+                sortField === SortFields.STATUS && sortType === SortTypes.ASC ? classes.activeSort : ""
+              )}
+            >
               <Triangle />
             </div>
           </div>

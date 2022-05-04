@@ -1,11 +1,15 @@
 import { ProductActionTypes } from "../../enums/ProductActionTypes";
+import { SortTypes } from "../../enums/SortTypes";
 import { ProductAction, ProductState } from "../../interfaces/products";
+import { sortProducts } from "../../utils/sortProducts";
 
 const initialState: ProductState = {
   products: [],
   isLoading: false,
   error: null,
   filteredProducts: [],
+  sortType: SortTypes.ASC,
+  sortField: null,
 };
 
 export const productsReducer = (state = initialState, action: ProductAction): ProductState => {
@@ -22,6 +26,13 @@ export const productsReducer = (state = initialState, action: ProductAction): Pr
         filteredProducts: state.products.filter((product) =>
           product.customer.toLowerCase().includes(action.payload.toLowerCase())
         ),
+      };
+    case ProductActionTypes.SORT:
+      return {
+        ...state,
+        sortType: state.sortType === SortTypes.ASC ? SortTypes.DESC : SortTypes.ASC,
+        sortField: action.payload,
+        filteredProducts: sortProducts(state.filteredProducts, state.sortType, action.payload),
       };
     default:
       return state;
