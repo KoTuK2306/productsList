@@ -1,5 +1,6 @@
 import { FC, useEffect } from "react";
 import classNames from "classnames";
+import cnBind from "classnames/bind";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { GridContainer } from "../../layouts/GridContainer";
 import { useTypedDispatch } from "../../hooks/useTypedDispatch";
@@ -8,11 +9,52 @@ import { Product as ProductComponent } from "./Product";
 import { Spinner } from "../Spinner";
 import { Pagination } from "../Pagination";
 import { Triangle } from "../../tsxIcons/triangle";
+import { sort } from "./../../store/actions/product";
+import { SortTypes } from "../../enums/SortTypes";
+import { SortFields } from "../../enums/SortFields";
 import classes from "./ProductsList.module.scss";
 
+const cx = cnBind.bind(classes);
+
+type FieldNames = "Tracking ID" | "Product" | "Customer" | "Date" | "Amount" | "Payment Mode" | "Status" | "Action";
+type ExcludedFieldNames = Exclude<FieldNames, "Tracking ID" | "Amount" | "Payment Mode" | "Action">;
+
+const fieldNames: FieldNames[] = ["Product", "Customer", "Date", "Status"];
+const columnNames: FieldNames[] = [
+  "Tracking ID",
+  "Product",
+  "Customer",
+  "Date",
+  "Amount",
+  "Payment Mode",
+  "Status",
+  "Action",
+];
+
 export const ProductsList: FC = () => {
-  const { error, isLoading, filteredProducts } = useTypedSelector((state) => state.products);
+  const { error, isLoading, filteredProducts, sortField, sortType } = useTypedSelector((state) => state.products);
   const { currentPage, productsPerPage } = useTypedSelector((state) => state.pagination);
+
+  const getSortField = (columnName: ExcludedFieldNames): SortFields => {
+    if (columnName === "Product") {
+      return SortFields.PRODUCT;
+    }
+    if (columnName === "Customer") {
+      return SortFields.CUSTOMER;
+    }
+    if (columnName === "Date") {
+      return SortFields.DATE;
+    }
+    if (columnName === "Status") {
+      return SortFields.STATUS;
+    }
+    return columnName;
+  };
+
+  const getActiveSortType = (setSortType: SortTypes, name: ExcludedFieldNames) => {
+    return `${sortField === getSortField(name) && cx({ activeSort: sortType === setSortType })}`;
+  };
+
   const dispatch = useTypedDispatch();
 
   const lastProductIndex = currentPage * productsPerPage;
@@ -25,62 +67,43 @@ export const ProductsList: FC = () => {
   return (
     <section className={classes.productsList}>
       <GridContainer>
-        <div className={classes.columnName}>
-          <p className={classes.title}>Tracking ID</p>
-        </div>
-        <button className={classNames(classes.columnName, classes.sortButton)}>
-          <p>Product</p>
-          <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>
-              <Triangle />
+        {columnNames.map((name) => {
+          if (fieldNames.includes(name)) {
+            return (
+              <button
+                key={name}
+                onClick={() => dispatch(sort(getSortField(name as ExcludedFieldNames)))}
+                className={classNames(classes.columnName, classes.sortButton)}
+              >
+                <p>{name}</p>
+                <div className={classes.trianglesWrapper}>
+                  <div
+                    className={classNames(
+                      classes.triangle,
+                      getActiveSortType(SortTypes.DESC, name as ExcludedFieldNames)
+                    )}
+                  >
+                    <Triangle />
+                  </div>
+                  <div
+                    className={classNames(
+                      classes.triangle,
+                      classes.rotated,
+                      getActiveSortType(SortTypes.ASC, name as ExcludedFieldNames)
+                    )}
+                  >
+                    <Triangle />
+                  </div>
+                </div>
+              </button>
+            );
+          }
+          return (
+            <div key={name} className={classes.columnName}>
+              <p className={classes.title}>{name}</p>
             </div>
-            <div className={classNames(classes.triangle, classes.rotated)}>
-              <Triangle />
-            </div>
-          </div>
-        </button>
-        <button className={classNames(classes.columnName, classes.sortButton)}>
-          <p>Customer</p>
-          <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>
-              <Triangle />
-            </div>
-            <div className={classNames(classes.triangle, classes.rotated)}>
-              <Triangle />
-            </div>
-          </div>
-        </button>
-        <button className={classNames(classes.columnName, classes.sortButton)}>
-          <p>Date</p>
-          <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>
-              <Triangle />
-            </div>
-            <div className={classNames(classes.triangle, classes.rotated)}>
-              <Triangle />
-            </div>
-          </div>
-        </button>
-        <div className={classes.columnName}>
-          <p>Amount</p>
-        </div>
-        <div className={classes.columnName}>
-          <p>Payment Mode</p>
-        </div>
-        <button className={classNames(classes.columnName, classes.sortButton)}>
-          <p>Status</p>
-          <div className={classes.trianglesWrapper}>
-            <div className={classes.triangle}>
-              <Triangle />
-            </div>
-            <div className={classNames(classes.triangle, classes.rotated)}>
-              <Triangle />
-            </div>
-          </div>
-        </button>
-        <div className={classes.columnName}>
-          <p className={classes.title}>Action</p>
-        </div>
+          );
+        })}
       </GridContainer>
       {isLoading && <Spinner />}
       {error && <h1>{error}</h1>}
