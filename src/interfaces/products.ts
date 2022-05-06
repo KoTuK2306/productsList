@@ -2,15 +2,14 @@ import { ProductActionTypes } from "../enums/ProductActionTypes";
 import { SortFields } from "../enums/SortFields";
 import { SortTypes } from "../enums/SortTypes";
 import { Product } from "./Product";
-import { ValueOf } from "./ValueOf";
 
 export interface ProductState {
   products: Product[];
   isLoading: boolean;
   error: null | string;
   filteredProducts: Product[];
-  sortType: ValueOf<SortTypes>;
-  sortField: ValueOf<SortFields> | null;
+  sortType: SortTypes.ASC | SortTypes.DESC | SortTypes.NONE;
+  sortField: SortFields | null;
 }
 
 export interface FetchProductAction {
@@ -30,7 +29,7 @@ export interface FilterProductAction {
 }
 export interface SortProductAction {
   type: ProductActionTypes.SORT;
-  payload: ValueOf<SortFields>;
+  payload: SortFields;
 }
 
 export type ProductAction =

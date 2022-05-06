@@ -1,39 +1,21 @@
 import { SortFields } from "../enums/SortFields";
 import { SortTypes } from "../enums/SortTypes";
 import { Product } from "../interfaces/Product";
-import { ValueOf } from "../interfaces/ValueOf";
 
-export const sortProducts = (
-  products: Product[],
-  sortType: ValueOf<SortTypes>,
-  sortField: ValueOf<SortFields>
-): Product[] => {
-  if (sortField === SortFields.PRODUCT) {
-    if (sortType === SortTypes.ASC) {
-      return products.sort((prev, next) => (prev.name > next.name ? -1 : 1));
-    }
-    return products.sort((prev, next) => (prev.name > next.name ? 1 : -1));
+export const sortProducts = (products: Product[], sortType: SortTypes, sortField: SortFields): Product[] => {
+  const fields: Record<SortFields, keyof Product> = {
+    [SortFields.PRODUCT]: "name",
+    [SortFields.CUSTOMER]: "customer",
+    [SortFields.DATE]: "date",
+    [SortFields.STATUS]: "status",
+  };
+  const field = fields[sortField];
+  switch (sortType) {
+    case SortTypes.ASC:
+      return products.sort((prev, next) => (prev[field] > next[field] ? -1 : 1));
+    case SortTypes.DESC:
+      return products.sort((prev: any, next: any) => (prev[field] > next[field] ? 1 : -1));
+    default:
+      return products;
   }
-
-  if (sortField === SortFields.CUSTOMER) {
-    if (sortType === SortTypes.ASC) {
-      return products.sort((prev, next) => (prev.customer > next.customer ? -1 : 1));
-    }
-    return products.sort((prev, next) => (prev.customer > next.customer ? 1 : -1));
-  }
-
-  if (sortField === SortFields.DATE) {
-    if (sortType === SortTypes.ASC) {
-      return products.sort((prev, next) => (prev.date > next.date ? -1 : 1));
-    }
-    return products.sort((prev, next) => (prev.date > next.date ? 1 : -1));
-  }
-
-  if (sortField === SortFields.STATUS) {
-    if (sortType === SortTypes.ASC) {
-      return products.sort((prev, next) => (prev.status > next.status ? -1 : 1));
-    }
-    return products.sort((prev, next) => (prev.status > next.status ? 1 : -1));
-  }
-  return products;
 };

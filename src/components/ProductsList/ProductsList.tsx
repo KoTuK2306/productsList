@@ -1,5 +1,6 @@
 import { FC, useEffect } from "react";
 import classNames from "classnames";
+import cnBind from "classnames/bind";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { GridContainer } from "../../layouts/GridContainer";
 import { useTypedDispatch } from "../../hooks/useTypedDispatch";
@@ -13,9 +14,34 @@ import { SortTypes } from "../../enums/SortTypes";
 import { SortFields } from "../../enums/SortFields";
 import classes from "./ProductsList.module.scss";
 
+const cx = cnBind.bind(classes);
+const columnNames = ["Tracking ID", "Product", "Customer", "Date", "Amount", "Payment Mode", "Status", "Action"];
+type FieldNames = "Product" | "Customer" | "Date" | "Status";
+
 export const ProductsList: FC = () => {
   const { error, isLoading, filteredProducts, sortField, sortType } = useTypedSelector((state) => state.products);
   const { currentPage, productsPerPage } = useTypedSelector((state) => state.pagination);
+
+  const getSortField = (columnName: FieldNames): SortFields => {
+    if (columnName === "Product") {
+      return SortFields.PRODUCT;
+    }
+    if (columnName === "Customer") {
+      return SortFields.CUSTOMER;
+    }
+    if (columnName === "Date") {
+      return SortFields.DATE;
+    }
+    if (columnName === "Status") {
+      return SortFields.STATUS;
+    }
+    return columnName;
+  };
+
+  const getActiveSortType = (setSortType: SortTypes, name: FieldNames) => {
+    return `${sortField === getSortField(name) && cx({ activeSort: sortType === setSortType })}`;
+  };
+
   const dispatch = useTypedDispatch();
 
   const lastProductIndex = currentPage * productsPerPage;
@@ -28,118 +54,34 @@ export const ProductsList: FC = () => {
   return (
     <section className={classes.productsList}>
       <GridContainer>
-        <div className={classes.columnName}>
-          <p className={classes.title}>Tracking ID</p>
-        </div>
-        <button
-          onClick={() => dispatch(sort(SortFields.PRODUCT))}
-          className={classNames(classes.columnName, classes.sortButton)}
-        >
-          <p>Product</p>
-          <div className={classes.trianglesWrapper}>
-            <div
-              className={classNames(
-                classes.triangle,
-                sortField === SortFields.PRODUCT && sortType === SortTypes.DESC ? classes.activeSort : ""
-              )}
-            >
-              <Triangle />
+        {columnNames.map((name) => {
+          if (name === "Product" || name === "Customer" || name === "Date" || name === "Status") {
+            return (
+              <button
+                key={name}
+                onClick={() => dispatch(sort(getSortField(name)))}
+                className={classNames(classes.columnName, classes.sortButton)}
+              >
+                <p>{name}</p>
+                <div className={classes.trianglesWrapper}>
+                  <div className={classNames(classes.triangle, getActiveSortType(SortTypes.DESC, name))}>
+                    <Triangle />
+                  </div>
+                  <div
+                    className={classNames(classes.triangle, classes.rotated, getActiveSortType(SortTypes.ASC, name))}
+                  >
+                    <Triangle />
+                  </div>
+                </div>
+              </button>
+            );
+          }
+          return (
+            <div key={name} className={classes.columnName}>
+              <p className={classes.title}>{name}</p>
             </div>
-            <div
-              className={classNames(
-                classes.triangle,
-                classes.rotated,
-                sortField === SortFields.PRODUCT && sortType === SortTypes.ASC ? classes.activeSort : ""
-              )}
-            >
-              <Triangle />
-            </div>
-          </div>
-        </button>
-        <button
-          onClick={() => dispatch(sort(SortFields.CUSTOMER))}
-          className={classNames(classes.columnName, classes.sortButton)}
-        >
-          <p>Customer</p>
-          <div className={classes.trianglesWrapper}>
-            <div
-              className={classNames(
-                classes.triangle,
-                sortField === SortFields.CUSTOMER && sortType === SortTypes.DESC ? classes.activeSort : ""
-              )}
-            >
-              <Triangle />
-            </div>
-            <div
-              className={classNames(
-                classes.triangle,
-                classes.rotated,
-                sortField === SortFields.CUSTOMER && sortType === SortTypes.ASC ? classes.activeSort : ""
-              )}
-            >
-              <Triangle />
-            </div>
-          </div>
-        </button>
-        <button
-          onClick={() => dispatch(sort(SortFields.DATE))}
-          className={classNames(classes.columnName, classes.sortButton)}
-        >
-          <p>Date</p>
-          <div className={classes.trianglesWrapper}>
-            <div
-              className={classNames(
-                classes.triangle,
-                sortField === SortFields.DATE && sortType === SortTypes.DESC ? classes.activeSort : ""
-              )}
-            >
-              <Triangle />
-            </div>
-            <div
-              className={classNames(
-                classes.triangle,
-                classes.rotated,
-                sortField === SortFields.DATE && sortType === SortTypes.ASC ? classes.activeSort : ""
-              )}
-            >
-              <Triangle />
-            </div>
-          </div>
-        </button>
-        <div className={classes.columnName}>
-          <p>Amount</p>
-        </div>
-        <div className={classes.columnName}>
-          <p>Payment Mode</p>
-        </div>
-        <button
-          onClick={() => dispatch(sort(SortFields.STATUS))}
-          className={classNames(classes.columnName, classes.sortButton)}
-        >
-          <p>Status</p>
-          <div className={classes.trianglesWrapper}>
-            <div
-              className={classNames(
-                classes.triangle,
-                sortField === SortFields.STATUS && sortType === SortTypes.DESC ? classes.activeSort : ""
-              )}
-            >
-              <Triangle />
-            </div>
-            <div
-              className={classNames(
-                classes.triangle,
-                classes.rotated,
-                sortField === SortFields.STATUS && sortType === SortTypes.ASC ? classes.activeSort : ""
-              )}
-            >
-              <Triangle />
-            </div>
-          </div>
-        </button>
-        <div className={classes.columnName}>
-          <p className={classes.title}>Action</p>
-        </div>
+          );
+        })}
       </GridContainer>
       {isLoading && <Spinner />}
       {error && <h1>{error}</h1>}

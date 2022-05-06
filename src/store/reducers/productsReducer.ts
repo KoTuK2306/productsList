@@ -30,7 +30,7 @@ export const productsReducer = (state = initialState, action: ProductAction): Pr
     case ProductActionTypes.SORT:
       return {
         ...state,
-        sortType: state.sortType === SortTypes.ASC ? SortTypes.DESC : SortTypes.ASC,
+        sortType: state.sortType === SortTypes.DESC ? SortTypes.ASC : SortTypes.DESC,
         sortField: action.payload,
         filteredProducts: sortProducts(state.filteredProducts, state.sortType, action.payload),
       };
