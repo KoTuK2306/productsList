@@ -15,14 +15,27 @@ import { SortFields } from "../../enums/SortFields";
 import classes from "./ProductsList.module.scss";
 
 const cx = cnBind.bind(classes);
-const columnNames = ["Tracking ID", "Product", "Customer", "Date", "Amount", "Payment Mode", "Status", "Action"];
-type FieldNames = "Product" | "Customer" | "Date" | "Status";
+
+type FieldNames = "Tracking ID" | "Product" | "Customer" | "Date" | "Amount" | "Payment Mode" | "Status" | "Action";
+type ExcludedFieldNames = Exclude<FieldNames, "Tracking ID" | "Amount" | "Payment Mode" | "Action">;
+
+const fieldNames: FieldNames[] = ["Product", "Customer", "Date", "Status"];
+const columnNames: FieldNames[] = [
+  "Tracking ID",
+  "Product",
+  "Customer",
+  "Date",
+  "Amount",
+  "Payment Mode",
+  "Status",
+  "Action",
+];
 
 export const ProductsList: FC = () => {
   const { error, isLoading, filteredProducts, sortField, sortType } = useTypedSelector((state) => state.products);
   const { currentPage, productsPerPage } = useTypedSelector((state) => state.pagination);
 
-  const getSortField = (columnName: FieldNames): SortFields => {
+  const getSortField = (columnName: ExcludedFieldNames): SortFields => {
     if (columnName === "Product") {
       return SortFields.PRODUCT;
     }
@@ -38,7 +51,7 @@ export const ProductsList: FC = () => {
     return columnName;
   };
 
-  const getActiveSortType = (setSortType: SortTypes, name: FieldNames) => {
+  const getActiveSortType = (setSortType: SortTypes, name: ExcludedFieldNames) => {
     return `${sortField === getSortField(name) && cx({ activeSort: sortType === setSortType })}`;
   };
 
@@ -55,20 +68,29 @@ export const ProductsList: FC = () => {
     <section className={classes.productsList}>
       <GridContainer>
         {columnNames.map((name) => {
-          if (name === "Product" || name === "Customer" || name === "Date" || name === "Status") {
+          if (fieldNames.includes(name)) {
             return (
               <button
                 key={name}
-                onClick={() => dispatch(sort(getSortField(name)))}
+                onClick={() => dispatch(sort(getSortField(name as ExcludedFieldNames)))}
                 className={classNames(classes.columnName, classes.sortButton)}
               >
                 <p>{name}</p>
                 <div className={classes.trianglesWrapper}>
-                  <div className={classNames(classes.triangle, getActiveSortType(SortTypes.DESC, name))}>
+                  <div
+                    className={classNames(
+                      classes.triangle,
+                      getActiveSortType(SortTypes.DESC, name as ExcludedFieldNames)
+                    )}
+                  >
                     <Triangle />
                   </div>
                   <div
-                    className={classNames(classes.triangle, classes.rotated, getActiveSortType(SortTypes.ASC, name))}
+                    className={classNames(
+                      classes.triangle,
+                      classes.rotated,
+                      getActiveSortType(SortTypes.ASC, name as ExcludedFieldNames)
+                    )}
                   >
                     <Triangle />
                   </div>

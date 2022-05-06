@@ -3,12 +3,14 @@ import { SortFields } from "../enums/SortFields";
 import { SortTypes } from "../enums/SortTypes";
 import { Product } from "./Product";
 
+export type TypesOfSort = SortTypes.ASC | SortTypes.DESC | SortTypes.NONE;
+
 export interface ProductState {
-  products: Product[];
+  originalProducts: Product[];
   isLoading: boolean;
   error: null | string;
   filteredProducts: Product[];
-  sortType: SortTypes.ASC | SortTypes.DESC | SortTypes.NONE;
+  sortType: TypesOfSort;
   sortField: SortFields | null;
 }
 
