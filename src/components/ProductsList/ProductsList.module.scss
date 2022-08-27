@@ -28,6 +28,10 @@
   .rotated {
     transform: rotate(180deg);
   }
+
+  .activeSort {
+    color: $purple;
+  }
 }
 
 .sortButton {
